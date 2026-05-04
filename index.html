@@ -1,419 +1,401 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DINDE HOUSE – Spécialités de Dinde & Poulet</title>
-  <style>
-    /* ── Reset & Base ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --red:     #c0392b;
-      --red-dk:  #922b21;
-      --gold:    #d4ac0d;
-      --cream:   #fdf6ec;
-      --dark:    #1a1a1a;
-      --grey:    #555;
-      --card-bg: #ffffff;
-      --radius:  12px;
-      --shadow:  0 4px 20px rgba(0,0,0,0.10);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--cream);
-      color: var(--dark);
-      line-height: 1.6;
-    }
-
-    /* ── Hero / Header ────────────────────────────────────────── */
-    header {
-      background: linear-gradient(135deg, var(--red-dk) 0%, var(--red) 60%, #e74c3c 100%);
-      color: #fff;
-      text-align: center;
-      padding: 60px 20px 50px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-
-    .logo-emoji { font-size: 4rem; display: block; margin-bottom: 12px; }
-
-    header h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 900;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    header p.tagline {
-      margin-top: 10px;
-      font-size: 1.15rem;
-      opacity: 0.9;
-      letter-spacing: 1px;
-    }
-
-    .gold-bar {
-      width: 80px;
-      height: 4px;
-      background: var(--gold);
-      margin: 18px auto 0;
-      border-radius: 2px;
-    }
-
-    /* ── Navigation ───────────────────────────────────────────── */
-    nav {
-      background: var(--dark);
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-
-    nav a {
-      color: #ddd;
-      text-decoration: none;
-      padding: 16px 28px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      transition: background 0.2s, color 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    nav a:hover, nav a.active { background: var(--red); color: #fff; }
-
-    /* ── Main Layout ──────────────────────────────────────────── */
-    main { max-width: 1100px; margin: 0 auto; padding: 50px 20px 80px; }
-
-    /* ── Section Titles ───────────────────────────────────────── */
-    .section-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .section-header .icon { font-size: 3rem; display: block; margin-bottom: 8px; }
-
-    .section-header h2 {
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--red-dk);
-    }
-
-    .section-header p {
-      color: var(--grey);
-      font-size: 1rem;
-      margin-top: 6px;
-    }
-
-    .divider {
-      width: 60px;
-      height: 3px;
-      background: var(--gold);
-      margin: 14px auto 0;
-      border-radius: 2px;
-    }
-
-    /* ── Product Grid ─────────────────────────────────────────── */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .product-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px 20px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      border-left: 4px solid var(--red);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.15);
-    }
-
-    .product-card .fr {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--dark);
-    }
-
-    .product-card .en {
-      font-size: 0.85rem;
-      color: var(--grey);
-      font-style: italic;
-    }
-
-    /* ── Section Separator ────────────────────────────────────── */
-    .section-sep {
-      border: none;
-      border-top: 2px dashed #e0cdb8;
-      margin: 60px 0;
-    }
-
-    /* ── Footer ───────────────────────────────────────────────── */
-    footer {
-      background: var(--dark);
-      color: #aaa;
-      text-align: center;
-      padding: 28px 20px;
-      font-size: 0.9rem;
-    }
-
-    footer span { color: var(--gold); font-weight: 700; }
-
-    /* ── Responsive ───────────────────────────────────────────── */
-    @media (max-width: 480px) {
-      nav { flex-direction: column; }
-      nav a { justify-content: center; }
-      .product-grid { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DINDE HOUSE - L'Excellence de la Volaille</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Newsreader:opsz,wght@6..72,400;600;700&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#fff8f7",
+                      "tertiary-fixed": "#b7ecf1",
+                      "on-primary-fixed-variant": "#7d2b29",
+                      "tertiary-fixed-dim": "#9ccfd5",
+                      "primary-container": "#6b1d1d",
+                      "primary-fixed-dim": "#ffb3ae",
+                      "on-surface-variant": "#554241",
+                      "primary": "#4d060a",
+                      "surface-dim": "#e8d6d4",
+                      "secondary-fixed": "#e4e2dd",
+                      "outline-variant": "#dbc0be",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#c8c6c2",
+                      "surface": "#fff8f7",
+                      "surface-container-highest": "#f0dedd",
+                      "on-tertiary-container": "#78abb1",
+                      "surface-container": "#fceae8",
+                      "surface-container-low": "#fff0ef",
+                      "surface-container-high": "#f6e4e2",
+                      "surface-tint": "#9c413f",
+                      "on-primary-fixed": "#410005",
+                      "primary-fixed": "#ffdad7",
+                      "inverse-surface": "#382e2d",
+                      "outline": "#887270",
+                      "background": "#fff8f7",
+                      "tertiary-container": "#004045",
+                      "on-background": "#231919",
+                      "on-secondary-fixed": "#1b1c19",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#231919",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#ffb3ae",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#174e53",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#e1dfdb",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#ffedeb",
+                      "tertiary": "#00282c",
+                      "on-secondary-container": "#63635f",
+                      "on-tertiary-fixed": "#002022",
+                      "error-container": "#ffdad6",
+                      "secondary": "#5e5e5b",
+                      "on-primary-container": "#f1837e",
+                      "on-secondary-fixed-variant": "#474744",
+                      "surface-variant": "#f0dedd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "xl": "80px",
+                      "gutter": "24px",
+                      "base": "8px",
+                      "lg": "48px",
+                      "container-max": "1280px",
+                      "xs": "4px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Newsreader"
+                      ],
+                      "display-xl": [
+                              "Newsreader"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Newsreader"
+                      ],
+                      "label-caps": [
+                              "Work Sans"
+                      ],
+                      "button": [
+                              "Work Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "button": [
+                              "14px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .texture-divider {
+            height: 2px;
+            background: repeating-linear-gradient(
+                to right,
+                transparent,
+                transparent 10px,
+                var(--color-outline-variant) 10px,
+                var(--color-outline-variant) 20px
+            );
+            opacity: 0.5;
+        }
+        .bg-texture-subtle {
+            background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23e8d6d4" fill-opacity="0.4" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"/%3E%3Ccircle cx="13" cy="13" r="3"/%3E%3C/g%3E%3C/svg%3E');
+        }
+      </style>
 </head>
-<body>
-
-<!-- ══════════════════ HERO ══════════════════ -->
-<header>
-  <span class="logo-emoji">🦃</span>
-  <h1>DINDE HOUSE</h1>
-  <p class="tagline">Spécialités de Dinde &amp; Poulet de qualité supérieure</p>
-  <div class="gold-bar"></div>
-</header>
-
-<!-- ══════════════════ NAV ══════════════════ -->
-<nav>
-  <a href="#dinde">🦃 Dinde</a>
-  <a href="#poulet">🍗 Poulet</a>
+<body class="bg-surface text-on-surface font-body-md antialiased">
+<!-- TopAppBar -->
+<header class="bg-stone-50 dark:bg-stone-900 fixed top-0 w-full z-50 border-b border-stone-200 dark:border-stone-800 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-tight text-red-900 dark:text-red-500 font-serif">
+                DINDE HOUSE
+            </div>
+<nav class="hidden md:flex items-center gap-8 font-serif text-stone-900 dark:text-stone-100">
+<a class="text-red-900 dark:text-red-400 border-b-2 border-red-900 dark:border-red-400 pb-1 duration-300 ease-in-out hover:opacity-80 transition-opacity" href="#">Boutique</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-red-900 dark:hover:text-red-400 transition-colors duration-300 ease-in-out hover:opacity-80" href="#">Nos Engagements</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-red-900 dark:hover:text-red-400 transition-colors duration-300 ease-in-out hover:opacity-80" href="#">Recettes</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-red-900 dark:hover:text-red-400 transition-colors duration-300 ease-in-out hover:opacity-80" href="#">Contact</a>
 </nav>
-
-<!-- ══════════════════ MAIN ══════════════════ -->
-<main>
-
-  <!-- ─── DINDE SECTION ─────────────────────── -->
-  <section id="dinde">
-    <div class="section-header">
-      <span class="icon">🦃</span>
-      <h2>Nos Produits Dinde</h2>
-      <p>DINDE HOUSE vous présente une sélection complète de produits de dinde</p>
-      <div class="divider"></div>
-    </div>
-
-    <div class="product-grid">
-
-      <div class="product-card">
-        <span class="fr">FILET</span>
-        <span class="en">Fillet</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">HAUT DE CUISSE À OS</span>
-        <span class="en">Bone-in upper thigh</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">HAUT DE CUISSE DÉSOSSÉE</span>
-        <span class="en">Boneless upper thigh</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">PILON</span>
-        <span class="en">Drumstick</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">PILON RACCOURCI</span>
-        <span class="en">Shortened drumstick</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">OSSO BUCCO</span>
-        <span class="en">Osso buco (cross-cut shank)</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">BLANQUETTE</span>
-        <span class="en">Stew meat</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">BLANQUETTE DÉSOSSÉE</span>
-        <span class="en">Boneless stew meat</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">AILERON</span>
-        <span class="en">Wing</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">AILERON DÉSOSSÉ</span>
-        <span class="en">Boneless wing</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">COU</span>
-        <span class="en">Neck</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">FOIE</span>
-        <span class="en">Liver</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">GÉSIER</span>
-        <span class="en">Gizzard</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">CŒUR</span>
-        <span class="en">Heart</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">ABATS</span>
-        <span class="en">Offal / Giblets</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">SAUCISSE DINDE</span>
-        <span class="en">Turkey sausage</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">VIANDE HACHÉE</span>
-        <span class="en">Ground meat</span>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="section-sep" />
-
-  <!-- ─── POULET SECTION ─────────────────────── -->
-  <section id="poulet">
-    <div class="section-header">
-      <span class="icon">🍗</span>
-      <h2>Et aussi – Nos Produits Poulet</h2>
-      <p>Une gamme complète de poulet pour tous vos besoins culinaires</p>
-      <div class="divider"></div>
-    </div>
-
-    <div class="product-grid">
-
-      <div class="product-card">
-        <span class="fr">POULET ENTIER</span>
-        <span class="en">Whole chicken</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">POULET DÉSOSSÉ</span>
-        <span class="en">Boneless chicken</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">FILET</span>
-        <span class="en">Fillet</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">CUISSE ENTIÈRE</span>
-        <span class="en">Whole leg</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">CUISSE ENTIÈRE DÉSOSSÉE</span>
-        <span class="en">Boneless whole leg</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">HAUT DE CUISSE À OS</span>
-        <span class="en">Bone-in upper thigh</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">HAUT DE CUISSE DÉSOSSÉE</span>
-        <span class="en">Boneless upper thigh</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">PILON</span>
-        <span class="en">Drumstick</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">AIL</span>
-        <span class="en">Garlic</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">AILERON</span>
-        <span class="en">Wing</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">FOIE</span>
-        <span class="en">Liver</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">GÉSIER</span>
-        <span class="en">Gizzard</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">CŒUR</span>
-        <span class="en">Heart</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">ABATS</span>
-        <span class="en">Offal / Giblets</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">COQUELET</span>
-        <span class="en">Cockerel / Small chicken</span>
-      </div>
-
-      <div class="product-card">
-        <span class="fr">POULET FERMIER</span>
-        <span class="en">Free-range chicken</span>
-      </div>
-
-    </div>
-  </section>
-
+<div class="flex items-center gap-4 text-red-900 dark:text-red-500">
+<button class="hover:opacity-80 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+</button>
+<button class="hover:opacity-80 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-[80px]">
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex items-center justify-center overflow-hidden bg-surface-container">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A highly stylized, moody close-up photograph of premium raw poultry on a rustic dark wooden butcher block. The scene is lit with dramatic, soft chiaroscuro lighting that highlights the fresh texture of the meat. A subtle garnish of sage leaves and coarse sea salt adds a touch of culinary elegance. The overall aesthetic is rich, artisanal, and sophisticated, aligning perfectly with a heritage butcher brand using deep burgundy and charcoal tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6x6XBdUetNb1g9ODiTpqRWIEhrYoCbwBSp2JF2CqPgDx0D4hAQqfLbH-gfX00dI9VhVIdZqozds02rRf379DL4RQt8uYz5Jyr3GHjQCwNT8o66KNd-g2cBgRfRaZ6HGx4_h77_HJBI6ZI4mArp7FES8dcb8obxXCxHZcogx6_aaYzB9y0fAqr7PWbkDvzqb4pbPN0IlrdBNsrV27sZwvbp_wrgByMxiuhZwj7fLAyKOtzgmImfK0qJVQvKMs74uOGP4KpE3gorm7C"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl px-gutter mx-auto">
+<h1 class="font-display-xl text-display-xl text-primary mb-md">L'Excellence de la Volaille</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-lg">DINDE HOUSE vous présente sa sélection premium. Une traçabilité irréprochable pour une qualité incomparable, de la ferme à votre table.</p>
+<button class="bg-primary text-on-primary font-button text-button px-8 py-4 rounded-DEFAULT hover:bg-primary-container transition-colors shadow-sm">
+                    DÉCOUVRIR LA SÉLECTION
+                </button>
+</div>
+</section>
+<div class="texture-divider max-w-container-max mx-auto my-xl"></div>
+<!-- DINDE Section -->
+<section class="max-w-container-max mx-auto px-gutter mb-xl">
+<div class="text-center mb-lg">
+<span class="font-label-caps text-label-caps text-on-tertiary-container tracking-widest uppercase block mb-xs">La Spécialité</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Notre Gamme Dinde</h2>
+</div>
+<!-- Bento Grid for Dinde -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Highlight Card -->
+<div class="md:col-span-2 md:row-span-2 bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant group">
+<div class="relative h-64 md:h-96 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A top-down view of beautifully arranged raw turkey cuts on a pristine white marble slab. The lighting is bright and clean, emphasizing the fresh, pale pink color of the meat. Delicate sprigs of rosemary and a few whole peppercorns are scattered artistically around the cuts. The visual style is modern, minimalist, and high-end, fitting a premium farm-to-table brand aesthetic with a light, airy mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsH05hdM5JLvNYNFPIlLXFFl2mSAWyVV-RONRYL1RrCGtXmKKZ4PI31EamHwIlqBgdI9fUSGgROr2XNkkMIGHkh5oP7EyHHtORfZYt9PCXcV9ND5QeaS4cpaHUNKlj6aOnfaQSVNRucn-I7idy4Dzz5qwXxr2o2nNAxDYx-19t1j2XIdONljp0uRASoh5uxHNWrtQIwf-YUuQWchferu5zUp39RFmy_4G3hyEpTI3b0pEc1dpjWAls2d_cPrlu3N82Nwm1ETtY8Slk"/>
+<div class="absolute top-4 right-4 bg-tertiary-container text-on-tertiary px-3 py-1 rounded-full font-label-caps text-label-caps flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                            SÉLECTION PREMIER CHOIX
+                        </div>
+</div>
+<div class="p-md bg-surface-container-low">
+<h3 class="font-headline-md text-headline-md text-primary mb-2">FILET DE DINDE</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">La pièce noble par excellence. Tendre, maigre et parfaite pour vos rôtis ou escalopes de qualité supérieure.</p>
+<button class="text-primary font-button text-button border border-outline px-4 py-2 rounded-DEFAULT hover:bg-surface-container-highest transition-colors">
+                            VOIR LES DÉTAILS
+                        </button>
+</div>
+</div>
+<!-- List of Cuts -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md md:row-span-2 overflow-y-auto max-h-[600px]">
+<h4 class="font-label-caps text-label-caps text-secondary mb-sm uppercase border-b border-outline-variant pb-2">Découpes &amp; Spécialités</h4>
+<ul class="space-y-3 font-body-md text-body-md text-on-surface">
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>HAUT DE CUISSE A OS</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>HAUT CUISSE DÉSOSSÉE</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>PILON &amp; PILON RACCOURCI</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>OSSO BUCCO</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>BLANQUETTE (AVEC/SANS OS)</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>AILERON &amp; AILERON DÉSOSSÉ</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>COU, FOIE, GESIER, CŒUR, ABATS</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>SAUCISSE DINDE</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer hover:bg-surface-container-low p-2 -mx-2 rounded transition-colors">
+<span>VIANDE HACHÉE</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- POULET Section -->
+<section class="bg-texture-subtle py-xl border-y border-outline-variant">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-lg">
+<span class="font-label-caps text-label-caps text-on-tertiary-container tracking-widest uppercase block mb-xs">L'Alternative Classique</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Et aussi : Notre Gamme Poulet</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-lg transition-shadow duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">set_meal</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 text-lg">POULET ENTIER</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Classique ou Fermier, prêt à rôtir.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-lg transition-shadow duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 text-lg">DÉCOUPES NOBLES</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Filet, Cuisse Entière (avec ou sans os).</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-lg transition-shadow duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">kitchen</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 text-lg">HAUT DE CUISSE &amp; PILON</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Parfaits pour les mijotés et marinades.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-lg transition-shadow duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">local_dining</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 text-lg">AUTRES MORCEAUX</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Ail, Aileron, Foie, Gesier, Cœur, Abats, Coquelet.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quality Commitment -->
+<section class="max-w-container-max mx-auto px-gutter py-xl">
+<div class="bg-surface-container-low rounded-xl p-lg border border-outline-variant flex flex-col md:flex-row items-center gap-lg">
+<div class="md:w-1/2">
+<img class="w-full h-80 object-cover rounded-lg" data-alt="A portrait of an artisan butcher wearing a pristine white apron, standing confidently in a modern, brightly lit shop. The background features clean, minimalist refrigeration units and subtle subway tiles. The mood is authentic, professional, and trustworthy. The lighting highlights the meticulous cleanliness of the environment, conveying a strong sense of food safety and heritage quality. The color palette emphasizes warm creams, crisp whites, and the subtle deep red of the brand's accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrsuh-k3U6zN7SiB56EKkD0Wk5N5iIYUzPyOH_eddGGVtfcbMkRR-GL_NWjYYvTq-eMFNDwoWn3TJB9iodm7uRhxNQ7DkGco4mfqcNL0Ksfdzt7cmjeFUWxlzZ0JBmmWCaZf74oCc_szKOxOiu7yS8UCVFiqbjmS2K-pr6Kafx4wnt7Hi0e6ydtPEq0T32qxXNo9FZka2dQLGCKaIlzlpd9P1G0na0hjlWSb7tbt9MrVfWk6pexCn1kiXxiCiTpYIf9UyStGV23lFx"/>
+</div>
+<div class="md:w-1/2">
+<span class="font-label-caps text-label-caps text-on-tertiary-container tracking-widest uppercase block mb-xs">Nos Engagements</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">De la ferme à la table, l'exigence de la qualité.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Chez DINDE HOUSE, nous sélectionnons nos volailles avec la plus grande rigueur. Nous garantissons une fraîcheur optimale, une traçabilité totale et un respect des traditions bouchères pour vous offrir un produit d'exception, sain et savoureux.</p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container mt-1">verified</span>
+<div>
+<h4 class="font-button text-button text-on-surface">Fraîcheur Garantie</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Approvisionnement quotidien et respect strict de la chaîne du froid.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container mt-1">map</span>
+<div>
+<h4 class="font-button text-button text-on-surface">Traçabilité Totale</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Origine contrôlée de chaque volaille proposée dans notre sélection.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Contact/Location (Simple Info) -->
+<section class="bg-surface-container-highest py-xl">
+<div class="max-w-container-max mx-auto px-gutter text-center">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">Retrouvez Notre Sélection</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg max-w-xl mx-auto">Pour toute commande spécifique, demande d'information ou pour connaître nos points de distribution de la gamme premium, n'hésitez pas à nous contacter.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md">
+<div class="flex items-center justify-center gap-2 bg-surface p-4 rounded border border-outline-variant">
+<span class="material-symbols-outlined text-primary">call</span>
+<span class="font-button text-button text-on-surface">01 23 45 67 89</span>
+</div>
+<div class="flex items-center justify-center gap-2 bg-surface p-4 rounded border border-outline-variant">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="font-button text-button text-on-surface">contact@dindehouse.fr</span>
+</div>
+<button class="bg-primary text-on-primary font-button text-button px-6 py-4 rounded-DEFAULT hover:bg-primary-container transition-colors shadow-sm">
+                        PASSER COMMANDE
+                    </button>
+</div>
+</div>
+</section>
 </main>
-
-<!-- ══════════════════ FOOTER ══════════════════ -->
-<footer>
-  <p>&copy; 2025 <span>DINDE HOUSE</span> – Tous droits réservés</p>
-  <p style="margin-top:6px; font-size:0.8rem;">Qualité &bull; Fraîcheur &bull; Tradition</p>
+<!-- Footer -->
+<footer class="bg-stone-100 dark:bg-stone-950 w-full py-12 px-6 mt-auto border-t border-stone-200 dark:border-stone-800">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl mx-auto text-center md:text-left">
+<div class="col-span-1 md:col-span-1">
+<div class="font-serif text-xl font-bold text-red-900 dark:text-red-500 mb-4">
+                    DINDE HOUSE
+                </div>
+<p class="font-sans text-sm tracking-wide text-stone-700 dark:text-stone-300">
+                    © 2024 DINDE HOUSE - L'Excellence de la Volaille. Tous droits réservés.
+                </p>
+</div>
+<div class="col-span-1 md:col-span-3 flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4 items-center">
+<a class="font-sans text-sm tracking-wide text-stone-500 dark:text-stone-500 hover:text-red-900 dark:hover:text-red-400 transition-all ease-out duration-200 hover:underline" href="#">Mentions Légales</a>
+<a class="font-sans text-sm tracking-wide text-stone-500 dark:text-stone-500 hover:text-red-900 dark:hover:text-red-400 transition-all ease-out duration-200 hover:underline" href="#">CGV</a>
+<a class="font-sans text-sm tracking-wide text-stone-500 dark:text-stone-500 hover:text-red-900 dark:hover:text-red-400 transition-all ease-out duration-200 hover:underline" href="#">Politique de Confidentialité</a>
+<a class="font-sans text-sm tracking-wide text-stone-500 dark:text-stone-500 hover:text-red-900 dark:hover:text-red-400 transition-all ease-out duration-200 hover:underline" href="#">Livraison</a>
+<a class="font-sans text-sm tracking-wide text-stone-500 dark:text-stone-500 hover:text-red-900 dark:hover:text-red-400 transition-all ease-out duration-200 hover:underline" href="#">FAQ</a>
+</div>
+</div>
 </footer>
-
-</body>
-</html>
+</body></html>
