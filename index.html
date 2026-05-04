@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DINDE HOUSE – Spécialités de Dinde & Poulet</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:     #c0392b;
+      --red-dk:  #922b21;
+      --gold:    #d4ac0d;
+      --cream:   #fdf6ec;
+      --dark:    #1a1a1a;
+      --grey:    #555;
+      --card-bg: #ffffff;
+      --radius:  12px;
+      --shadow:  0 4px 20px rgba(0,0,0,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── Hero / Header ────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--red-dk) 0%, var(--red) 60%, #e74c3c 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .logo-emoji { font-size: 4rem; display: block; margin-bottom: 12px; }
+
+    header h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    header p.tagline {
+      margin-top: 10px;
+      font-size: 1.15rem;
+      opacity: 0.9;
+      letter-spacing: 1px;
+    }
+
+    .gold-bar {
+      width: 80px;
+      height: 4px;
+      background: var(--gold);
+      margin: 18px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+    nav {
+      background: var(--dark);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      padding: 16px 28px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a:hover, nav a.active { background: var(--red); color: #fff; }
+
+    /* ── Main Layout ──────────────────────────────────────────── */
+    main { max-width: 1100px; margin: 0 auto; padding: 50px 20px 80px; }
+
+    /* ── Section Titles ───────────────────────────────────────── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-header .icon { font-size: 3rem; display: block; margin-bottom: 8px; }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--red-dk);
+    }
+
+    .section-header p {
+      color: var(--grey);
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 14px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ── Product Grid ─────────────────────────────────────────── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-left: 4px solid var(--red);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+    }
+
+    .product-card .fr {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .product-card .en {
+      font-size: 0.85rem;
+      color: var(--grey);
+      font-style: italic;
+    }
+
+    /* ── Section Separator ────────────────────────────────────── */
+    .section-sep {
+      border: none;
+      border-top: 2px dashed #e0cdb8;
+      margin: 60px 0;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: #aaa;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.9rem;
+    }
+
+    footer span { color: var(--gold); font-weight: 700; }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      nav { flex-direction: column; }
+      nav a { justify-content: center; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<header>
+  <span class="logo-emoji">🦃</span>
+  <h1>DINDE HOUSE</h1>
+  <p class="tagline">Spécialités de Dinde &amp; Poulet de qualité supérieure</p>
+  <div class="gold-bar"></div>
+</header>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<nav>
+  <a href="#dinde">🦃 Dinde</a>
+  <a href="#poulet">🍗 Poulet</a>
+</nav>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<main>
+
+  <!-- ─── DINDE SECTION ─────────────────────── -->
+  <section id="dinde">
+    <div class="section-header">
+      <span class="icon">🦃</span>
+      <h2>Nos Produits Dinde</h2>
+      <p>DINDE HOUSE vous présente une sélection complète de produits de dinde</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="product-grid">
+
+      <div class="product-card">
+        <span class="fr">FILET</span>
+        <span class="en">Fillet</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">HAUT DE CUISSE À OS</span>
+        <span class="en">Bone-in upper thigh</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">HAUT DE CUISSE DÉSOSSÉE</span>
+        <span class="en">Boneless upper thigh</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">PILON</span>
+        <span class="en">Drumstick</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">PILON RACCOURCI</span>
+        <span class="en">Shortened drumstick</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">OSSO BUCCO</span>
+        <span class="en">Osso buco (cross-cut shank)</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">BLANQUETTE</span>
+        <span class="en">Stew meat</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">BLANQUETTE DÉSOSSÉE</span>
+        <span class="en">Boneless stew meat</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">AILERON</span>
+        <span class="en">Wing</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">AILERON DÉSOSSÉ</span>
+        <span class="en">Boneless wing</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">COU</span>
+        <span class="en">Neck</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">FOIE</span>
+        <span class="en">Liver</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">GÉSIER</span>
+        <span class="en">Gizzard</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">CŒUR</span>
+        <span class="en">Heart</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">ABATS</span>
+        <span class="en">Offal / Giblets</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">SAUCISSE DINDE</span>
+        <span class="en">Turkey sausage</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">VIANDE HACHÉE</span>
+        <span class="en">Ground meat</span>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-sep" />
+
+  <!-- ─── POULET SECTION ─────────────────────── -->
+  <section id="poulet">
+    <div class="section-header">
+      <span class="icon">🍗</span>
+      <h2>Et aussi – Nos Produits Poulet</h2>
+      <p>Une gamme complète de poulet pour tous vos besoins culinaires</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="product-grid">
+
+      <div class="product-card">
+        <span class="fr">POULET ENTIER</span>
+        <span class="en">Whole chicken</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">POULET DÉSOSSÉ</span>
+        <span class="en">Boneless chicken</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">FILET</span>
+        <span class="en">Fillet</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">CUISSE ENTIÈRE</span>
+        <span class="en">Whole leg</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">CUISSE ENTIÈRE DÉSOSSÉE</span>
+        <span class="en">Boneless whole leg</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">HAUT DE CUISSE À OS</span>
+        <span class="en">Bone-in upper thigh</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">HAUT DE CUISSE DÉSOSSÉE</span>
+        <span class="en">Boneless upper thigh</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">PILON</span>
+        <span class="en">Drumstick</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">AIL</span>
+        <span class="en">Garlic</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">AILERON</span>
+        <span class="en">Wing</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">FOIE</span>
+        <span class="en">Liver</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">GÉSIER</span>
+        <span class="en">Gizzard</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">CŒUR</span>
+        <span class="en">Heart</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">ABATS</span>
+        <span class="en">Offal / Giblets</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">COQUELET</span>
+        <span class="en">Cockerel / Small chicken</span>
+      </div>
+
+      <div class="product-card">
+        <span class="fr">POULET FERMIER</span>
+        <span class="en">Free-range chicken</span>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <p>&copy; 2025 <span>DINDE HOUSE</span> – Tous droits réservés</p>
+  <p style="margin-top:6px; font-size:0.8rem;">Qualité &bull; Fraîcheur &bull; Tradition</p>
+</footer>
+
+</body>
+</html>
